@@ -9,11 +9,17 @@
 	</head>
 	
 	<body>
+		<div class="hearts-background" id="heartsContainer"></div>
+		
 		<div class="main">
 			<canvas id="love"></canvas>
 		</div>
 		
-		<div style="color:red; font-size:14px; position:absolute; left:10px; top:10px; z-index:12;">
+		<div style="color:white; font-size:36px; font-weight:bold; position:fixed; left:50%; top:30px; transform:translateX(-50%); z-index:12; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); font-family:cursive; text-align:center; width:100%;">
+			Happy Rose Day My Love ❤️
+		</div>
+		
+		<div style="color:rgba(255,255,255,0.7); font-size:14px; position:absolute; left:10px; top:10px; z-index:12;">
 			<div class="clear"></div>
 			<div>
 				注：请使用Chrome、 Firefox、 Safari、IE9+、Opera浏览~~
@@ -24,5 +30,37 @@
 		
 		<script type="text/javascript" src="./js/line.js"></script>
 		<script type="text/javascript" src="./js/index.js"></script>
+		
+		<script type="text/javascript">
+		// Generate animated hearts in background
+		function createHearts() {
+			const container = document.getElementById('heartsContainer');
+			const heartSymbols = ['❤️', '💕', '💖', '💗', '💝'];
+			
+			function generateHeart() {
+				const heart = document.createElement('div');
+				heart.className = 'heart';
+				heart.textContent = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
+				heart.style.left = Math.random() * window.innerWidth + 'px';
+				heart.style.animationDuration = (Math.random() * 3 + 4) + 's';
+				heart.style.animationDelay = Math.random() * 2 + 's';
+				heart.style.fontSize = (Math.random() * 30 + 20) + 'px';
+				container.appendChild(heart);
+				
+				// Remove heart after animation completes
+				setTimeout(() => heart.remove(), 8000);
+			}
+			
+			// Generate initial hearts
+			for(let i = 0; i < 30; i++) {
+				generateHeart();
+			}
+			
+			// Keep generating new hearts
+			setInterval(generateHeart, 300);
+		}
+		
+		window.addEventListener('load', createHearts);
+		</script>
 	</body>
 </html>
